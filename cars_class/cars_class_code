@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the dataset into a Pandas DataFrame
-cars_class = pd.read_csv("cars_class (1).csv")
+cars_class = pd.read_csv("cars_class.csv")
 
 # Separate features (X) and target variable (y)
 X = cars_class.drop('Class', axis=1)
