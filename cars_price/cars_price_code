@@ -1,12 +1,15 @@
 # Import required libraries
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt 
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # Load the dataset into a Pandas DataFrame
-cars_price = pd.read_csv("cars_price.csv")
+cars_price = pd.read_csv("C:/Users/dhana/Downloads/cars_price.csv")
 
 # Handle missing values by replacing '?' with NaN and dropping rows with NaN
 cars_price.replace('?', np.nan, inplace=True)
@@ -48,5 +51,17 @@ r2 = r2_score(y_test, y_pred)
 
 # Print regression metrics
 print("Mean Squared Error:", mse)
+print("Mean Absolute Error:", mae)
+print("R-squared:", r2)
+
+# Extract feature importance scores and create a DataFrame
+feature_importance = pd.DataFrame({'Feature': X.columns, 'Importance': rf_model.feature_importances_})
+feature_importance = feature_importance.sort_values(by='Importance', ascending=False)
+
+# Visualize feature importance using a bar plot
+plt.figure(figsize=(5, 15))
+sns.barplot(x='Importance', y='Feature', data=feature_importance)
+plt.title('Feature Importance')
+plt.show()
 print("Mean Absolute Error:", mae)
 print("R-squared:", r2)
